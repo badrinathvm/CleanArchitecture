@@ -21,14 +21,19 @@ struct ArticleCard: View {
     }
     
     var body: some View {
-        VStack {
-            ForEach(state.articles) { article in
-                HStack {
+        ScrollView(Axis.Set.vertical, showsIndicators: false) {
+            VStack(alignment: .leading) {
+                ForEach(state.articles) { article in
                     Text(article.title)
+                        .font(.title)
                     
-                    Text(article.content)
+                    if let content = article.content {
+                        Text(content)
+                            .font(.subheadline)
+                    }
                 }
             }
+            .padding(.all)
         }
         .onAppear {
             self.onLoad()

@@ -9,13 +9,13 @@ import Foundation
 
 // MARK: - Business Logic
 struct ArticleUseCase {
-    private let repository: ArticleInterface
+    private let datasource: ArticleInterface
     
-    init(repository: ArticleInterface) {
-        self.repository = repository
+    init(datasource: ArticleInterface) {
+        self.datasource = datasource
     }
     
     func getArticles() async throws -> [Article] {
-        return try await repository.getArticles()
+        return try await datasource.getArticles()
     }
 }

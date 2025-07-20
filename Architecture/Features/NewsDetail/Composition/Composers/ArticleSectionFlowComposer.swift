@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Section Composer
 struct ArticleSectionFlowComposer {
-    static var articleRepository : ArticleInterface = {
+    static var articleDataSource : ArticleInterface = {
         let repository = ArticleRepository(service: ArticleService())
         return ArticleDecorator(
             logger: ConsoleLogger(),
@@ -25,7 +25,7 @@ struct ArticleSectionFlowComposer {
                 let action = ArticleAction(
                     state: state,
                     articleUseCase: ArticleUseCase(
-                        repository: articleRepository
+                        datasource: articleDataSource
                     )
                 )
                 
