@@ -245,13 +245,6 @@ struct CachingDecorator<T>: SomeInterface {
 - File logging in production
 - Remote logging for analytics
 
-## 📚 Learning Resources
-
-- [Clean Architecture by Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [SwiftUI Documentation](https://developer.apple.com/documentation/swiftui)
-- [Repository Pattern](https://martinfowler.com/eaaCatalog/repository.html)
-- [Decorator Pattern](https://refactoring.guru/design-patterns/decorator)
-
 ## 🤝 Contributing
 
 1. Fork the repository
