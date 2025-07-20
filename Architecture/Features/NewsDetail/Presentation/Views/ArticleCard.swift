@@ -9,34 +9,62 @@ import SwiftUI
 
 // MARK: - UI Component
 struct ArticleCard: View {
-    @Bindable private var state:NewsState
+    @State private var hasCompletedInitialLoad = false
+    @Bindable private var state: NewsState
     let onLoad: () -> Void
+    let onLoadMore: () -> Void
     
     init(
         state: NewsState,
-        onLoad: @escaping () -> Void
+        onLoad: @escaping () -> Void,
+        onLoadMore: @escaping () -> Void
     ) {
         self._state = Bindable(state)
         self.onLoad = onLoad
+        self.onLoadMore = onLoadMore
     }
     
     var body: some View {
-        ScrollView(Axis.Set.vertical, showsIndicators: false) {
-            VStack(alignment: .leading) {
+        List {
+            LazyVStack(alignment: .leading) {
                 ForEach(state.articles) { article in
                     Text(article.title)
-                        .font(.title)
+                        .font(.headline)
                     
                     if let content = article.content {
                         Text(content)
                             .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
                 }
+                .padding(.all)
             }
-            .padding(.all)
+            
+            if state.isLoading {
+                ProgressView("Loading Articles...")
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else {
+                Color.clear
+                    .onAppear {
+                        // check if articles exusts before loading
+                        if hasCompletedInitialLoad {
+                            print("Place for Pagination - Loading more articles")
+                            // Call your pagination logic here
+                            self.onLoadMore()
+                        }
+                    }
+            }
         }
+        .listStyle(PlainListStyle())
         .onAppear {
             self.onLoad()
+        }
+        .onChange(of: state.articles.isEmpty) { oldValue , newValue in
+            // oldValue = true, newValue = false
+            if !newValue && !hasCompletedInitialLoad {
+                hasCompletedInitialLoad = true
+            }
         }
     }
 }

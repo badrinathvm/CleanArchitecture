@@ -35,6 +35,11 @@ struct ArticleSectionFlowComposer {
                         Task {
                             await action.execute()
                         }
+                    },
+                    onLoadMore: {
+                        Task {
+                            await action.execute(loadMore: true)
+                        }
                     }
                 )
             }

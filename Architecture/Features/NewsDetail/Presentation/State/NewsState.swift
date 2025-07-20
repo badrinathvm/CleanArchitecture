@@ -11,4 +11,5 @@ import Foundation
 @Observable
 class NewsState {
     var articles: [Article] = []
+    var isLoading = false
 }
