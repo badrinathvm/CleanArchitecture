@@ -98,9 +98,9 @@ class NewsState {
 ## 🔄 Data Flow
 
 ```
-UI Interaction → Action → UseCase → Repository → External Service
-      ↑                                              ↓
-   State ←── State Update ←── Domain Model ←── Raw Data
+UI Interaction → Action → UseCase → Decorator → Repository → External Service
+      ↑                                                              ↓
+   State ←── State Update ←── Domain Model ←── Raw Data ←────────────┘
 ```
 
 1. **User Interaction**: UI component triggers action
@@ -207,7 +207,7 @@ protocol NewFeatureInterface {
 
 // 2. Create use case
 struct NewFeatureUseCase {
-    let repository: NewFeatureInterface
+    let datasource: NewFeatureInterface
 }
 
 // 3. Implement repository

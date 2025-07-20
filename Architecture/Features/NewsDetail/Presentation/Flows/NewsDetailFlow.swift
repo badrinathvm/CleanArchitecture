@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// State Manager
+// MARK: - State Manager
 struct NewsDetailFlow<Detail:View>: View {
     @State private var state: NewsState
     let detail: (NewsState) -> Detail
