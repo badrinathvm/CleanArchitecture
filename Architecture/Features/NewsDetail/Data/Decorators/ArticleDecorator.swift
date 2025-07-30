@@ -15,7 +15,10 @@ import Foundation
      ArticleService (API calls)
  */
 
-// Logging, Caching, Retry
+/*  Common Cross Custting concerns - Theyt Spans across multiple modules.
+ Logging, Caching, Retry, Performance, Analytics, Security Transaction Managment
+ */
+
 struct ArticleDecorator: ArticleRepostoryInterface {
     private let logger: LoggerInterface
     private let repository: ArticleRepostoryInterface
