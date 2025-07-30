@@ -15,7 +15,7 @@ import Foundation
      ArticleService (API calls)
  */
 
-
+// Logging, Caching, Retry
 struct ArticleDecorator: ArticleRepostoryInterface {
     private let logger: LoggerInterface
     private let repository: ArticleRepostoryInterface
@@ -40,3 +40,5 @@ struct ArticleDecorator: ArticleRepostoryInterface {
         }
     }
 }
+
+
