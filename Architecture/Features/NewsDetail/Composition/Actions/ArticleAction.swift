@@ -9,14 +9,14 @@ import Foundation
 
 struct ArticleAction {
     private let state: NewsState
-    private let articleUseCase: ArticleUseCase
+    private let usecase: ArticleUseCase
     
     init(
         state: NewsState,
-        articleUseCase: ArticleUseCase
+        usecase: ArticleUseCase
     ) {
         self.state = state
-        self.articleUseCase = articleUseCase
+        self.usecase = usecase
     }
     
     @MainActor
@@ -28,7 +28,7 @@ struct ArticleAction {
             state.isLoading = false
         }
         do {
-            let articles = try await articleUseCase.getArticles()
+            let articles = try await usecase.getArticles()
             if loadMore {
                 if let lastArticle = articles.last {
                     state.articles.append(lastArticle)

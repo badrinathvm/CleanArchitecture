@@ -6,5 +6,6 @@
 //
 
 protocol LoggerInterface {
-    func log(_ message: String)
+    func logInfo(_ message: String)
+    func logError(_ message: String)
 }

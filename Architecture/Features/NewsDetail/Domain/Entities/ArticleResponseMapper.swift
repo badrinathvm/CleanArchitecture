@@ -10,13 +10,13 @@ import Foundation
 
 // MARK: - Mapper (converts API → Domain)
 struct ArticleResponseMapper {
-    private static let dateFormatter: ISO8601DateFormatter = {
+    private let dateFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
     }()
     
-    static func map(_ response: NewsArticlesResponse) -> [Article] {
+    func map(_ response: NewsArticlesResponse) -> [Article] {
         return response.articles.compactMap { articleResponse in
             guard let url = URL(string: articleResponse.url),
                   let publishedDate = dateFormatter.date(from: articleResponse.publishedAt) else {
@@ -41,7 +41,7 @@ struct ArticleResponseMapper {
         }
     }
     
-    private static func inferCategory(from text: String) -> ArticleCategory {
+    private func inferCategory(from text: String) -> ArticleCategory {
         let lowercased = text.lowercased()
         
         if lowercased.contains("tech") || lowercased.contains("ai") || lowercased.contains("software") {

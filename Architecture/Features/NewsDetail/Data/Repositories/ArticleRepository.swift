@@ -8,14 +8,20 @@
 import Foundation
 
 // MARK: - Repository Implementation
-struct ArticleRepository: ArticleInterface {
+struct ArticleRepository: ArticleRepostoryInterface {
     let service: ArticleService
+    let mapper: ArticleResponseMapper
     
-    init(service: ArticleService) {
+    init(
+        service: ArticleService,
+        mapper: ArticleResponseMapper
+    ) {
         self.service = service
+        self.mapper = mapper
     }
     
     func getArticles() async throws -> [Article] {
-        try await service.getArticles()
+        guard let newsResponse = try await service.getArticles() else { return [] }
+        return mapper.map(newsResponse)
     }
 }

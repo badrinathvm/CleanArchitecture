@@ -9,9 +9,9 @@ import Foundation
 
 // MARK: - Business Logic
 struct ArticleUseCase {
-    private let datasource: ArticleInterface
+    private let datasource: ArticleRepostoryInterface
     
-    init(datasource: ArticleInterface) {
+    init(datasource: ArticleRepostoryInterface) {
         self.datasource = datasource
     }
     

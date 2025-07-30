@@ -7,16 +7,17 @@
 
 import SwiftUI
 
+struct ArticleFactory {
+    static func useCase() -> ArticleUseCase {
+        let repository = ArticleRepository(service: ArticleService(), mapper: ArticleResponseMapper())
+        let decorator = ArticleDecorator(logger: ConsoleLogger(), repository: repository)
+        return ArticleUseCase(datasource: decorator)
+    }
+}
+
 // MARK: - Section Composer
+
 struct ArticleSectionFlowComposer {
-    static var articleDataSource : ArticleInterface = {
-        let repository = ArticleRepository(service: ArticleService())
-        return ArticleDecorator(
-            logger: ConsoleLogger(),
-            repository: repository
-        )
-    }()
-    
     static func compose(_ state: NewsState) -> ArticleFlow<ArticleCard> {
         ArticleFlow(
             state: state,
@@ -24,9 +25,7 @@ struct ArticleSectionFlowComposer {
                 // create action
                 let action = ArticleAction(
                     state: state,
-                    articleUseCase: ArticleUseCase(
-                        datasource: articleDataSource
-                    )
+                    usecase: ArticleFactory.useCase()  // ✅ Use factory result directly
                 )
                 
                 return ArticleCard(

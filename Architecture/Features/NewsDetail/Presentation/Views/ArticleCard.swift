@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - UI Component
 struct ArticleCard: View {
-    @State private var hasCompletedInitialLoad = false
+    @State private var isInitialLoadComplete = false
     @Bindable private var state: NewsState
     let onLoad: () -> Void
     let onLoadMore: () -> Void
@@ -47,8 +47,8 @@ struct ArticleCard: View {
             } else {
                 Color.clear
                     .onAppear {
-                        // check if articles exusts before loading
-                        if hasCompletedInitialLoad {
+                        // check if articles exists before loading
+                        if isInitialLoadComplete {
                             print("Place for Pagination - Loading more articles")
                             // Call your pagination logic here
                             self.onLoadMore()
@@ -62,9 +62,10 @@ struct ArticleCard: View {
         }
         .onChange(of: state.articles.isEmpty) { oldValue , newValue in
             // oldValue = true, newValue = false
-            if !newValue && !hasCompletedInitialLoad {
-                hasCompletedInitialLoad = true
+            if !newValue && !isInitialLoadComplete {
+                isInitialLoadComplete = true
             }
         }
+        .scrollIndicators(.hidden)
     }
 }

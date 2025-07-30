@@ -13,14 +13,13 @@ import Foundation
 struct ArticleService {
     init() {}
     
-    func getArticles() async throws -> [Article] {
-        guard let url = URL(string: "https://gist.githubusercontent.com/badrinathvm/44d0d180d0131b831ae979f6daf09c49/raw/9944f625e1bc280069cf5bf043299b77cb616d0c/news_articles.json") else { return [] }
+    func getArticles() async throws -> NewsArticlesResponse? {
+        guard let url = URL(string: "https://gist.githubusercontent.com/badrinathvm/44d0d180d0131b831ae979f6daf09c49/raw/9944f625e1bc280069cf5bf043299b77cb616d0c/news_articles.json") else { return nil }
         let result = await fetchArticles(url: url)
         
         switch result {
         case .success(let response):
-            let articles = ArticleResponseMapper.map(response)
-            return articles
+            return response
         case .failure(let error):
             throw error
         }

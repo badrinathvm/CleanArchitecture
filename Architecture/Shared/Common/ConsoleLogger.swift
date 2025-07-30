@@ -8,7 +8,12 @@
 import Foundation
 
 struct ConsoleLogger: LoggerInterface {
-    func log(_ message: String) {
+    func logInfo(_ message: String) {
         print("🔍 [CONSOLE] \(message)")
     }
+    
+    func logError(_ message: String) {
+        print("🔍 [CONSOLE:Error] \(message)")
+    }
+
 }

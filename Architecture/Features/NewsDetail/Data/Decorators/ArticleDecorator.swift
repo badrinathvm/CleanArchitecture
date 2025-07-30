@@ -16,20 +16,27 @@ import Foundation
  */
 
 
-struct ArticleDecorator: ArticleInterface {
+struct ArticleDecorator: ArticleRepostoryInterface {
     private let logger: LoggerInterface
-    private let repository: ArticleInterface
+    private let repository: ArticleRepostoryInterface
     
     init(
         logger: LoggerInterface,
-        repository: ArticleInterface
+        repository: ArticleRepostoryInterface
     ) {
         self.logger = logger
         self.repository = repository
     }
     
     func getArticles() async throws -> [Article] {
-        logger.log("Getting articles...")
-        return try await repository.getArticles()
+        do {
+            logger.logInfo("Getting articles...")
+            let articles = try await repository.getArticles()
+            logger.logInfo("Fetched articles successfully")
+            return articles
+        } catch  {
+            logger.logError(error.localizedDescription)
+            throw error
+        }
     }
 }
