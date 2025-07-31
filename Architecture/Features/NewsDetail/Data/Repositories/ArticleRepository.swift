@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Repository Implementation
 
-struct ArticleRepository: ArticleRepostoryInterface {
+struct ArticleRepository: ArticleRepositoryInterface {
     let service: ArticleService
     let mapper: ArticleResponseMapper
     
@@ -28,7 +28,7 @@ struct ArticleRepository: ArticleRepostoryInterface {
 }
 
 
-struct OfflineRepository: ArticleRepostoryInterface {
+struct OfflineRepository: ArticleRepositoryInterface {
     func getArticles() async throws -> [Article] {
         let sampleArticles = [
             Article(

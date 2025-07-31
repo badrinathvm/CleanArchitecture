@@ -19,13 +19,13 @@ import Foundation
  Logging, Caching, Retry, Performance, Analytics, Security Transaction Managment
  */
 
-struct ArticleDecorator: ArticleRepostoryInterface {
+struct ArticleDecorator: ArticleRepositoryInterface {
     private let logger: LoggerInterface
-    private let repository: ArticleRepostoryInterface
+    private let repository: ArticleRepositoryInterface
     
     init(
         logger: LoggerInterface,
-        repository: ArticleRepostoryInterface
+        repository: ArticleRepositoryInterface
     ) {
         self.logger = logger
         self.repository = repository

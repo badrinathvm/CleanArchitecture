@@ -6,13 +6,13 @@
 //
 
 
-struct CacheDecorator: ArticleRepostoryInterface {
+struct CacheDecorator: ArticleRepositoryInterface {
     private let cache: CacheInterface
-    private let repository: ArticleRepostoryInterface
+    private let repository: ArticleRepositoryInterface
     
     init(
         cache: CacheInterface,
-        repository: ArticleRepostoryInterface
+        repository: ArticleRepositoryInterface
     ) {
         self.cache = cache
         self.repository = repository

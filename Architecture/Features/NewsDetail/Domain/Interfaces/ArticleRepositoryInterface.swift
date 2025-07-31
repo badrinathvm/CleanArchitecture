@@ -16,6 +16,6 @@ import Foundation
 
 
 // MARK: - Domain  Interfaces ( Abstratc Contract) 
-protocol ArticleRepostoryInterface {
+protocol ArticleRepositoryInterface {
     func getArticles() async throws-> [Article]
 }

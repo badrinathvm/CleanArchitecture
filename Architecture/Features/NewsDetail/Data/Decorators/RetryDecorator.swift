@@ -6,7 +6,7 @@
 //
 
 // Cross- cutting concernes via decorator
-struct RetryDecorator: ArticleRepostoryInterface {
+struct RetryDecorator: ArticleRepositoryInterface {
     private let repository: ArticleRepository
     private let maxRetries: Int
     
